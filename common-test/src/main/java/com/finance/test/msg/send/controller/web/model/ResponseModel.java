@@ -1,5 +1,6 @@
 package com.finance.test.msg.send.controller.web.model;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -20,5 +21,6 @@ public class ResponseModel implements Serializable{
 
     private String resStatus;
     private String resMsg;
+    private boolean isSuccess;
     private List<Object> result = new ArrayList<Object>();
 }

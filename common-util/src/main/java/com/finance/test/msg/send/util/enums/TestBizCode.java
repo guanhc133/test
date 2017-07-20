@@ -15,7 +15,9 @@ public enum TestBizCode {
     BIZ_CODE_400002("BIZ_CODE_400002","参数有误"),
     BIZ_CODE_400003("BIZ_CODE_400003", "用户名不能为空"),
     BIZ_CODE_400004("BIZ_CODE_400004", "用户名已被注册"),
-    BIZ_CODE_400005("BIZ_CODE_400005", "用户不存在");
+    BIZ_CODE_400005("BIZ_CODE_400005", "用户不存在"),
+    BIZ_CODE_400006("BIZ_CODE_400006", "用户名或密码错误");
+
 
 
 

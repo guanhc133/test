@@ -47,6 +47,8 @@
         <hibernate.version>5.0.1.Final</hibernate.version>
         <validation-api-version>1.1.0.Final</validation-api-version>
         <jsp-api.version>2.3.1</jsp-api.version>
+        <json-lib.version>2.4</json-lib.version>
+        <jackson.version>2.5.4</jackson.version>
     </properties>
 
     <dependencyManagement>
@@ -260,6 +262,21 @@
                 <artifactId>javax.servlet.jsp-api</artifactId>
                 <version>${jsp-api.version}</version>
                 <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>net.sf.json-lib</groupId>
+                <artifactId>json-lib</artifactId>
+                <version>${json-lib.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

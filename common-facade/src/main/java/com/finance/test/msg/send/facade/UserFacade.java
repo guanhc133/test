@@ -13,5 +13,6 @@ import com.finance.test.msg.send.util.model.Response;
  */
 public interface UserFacade {
     Response<UserRespDto> queryUserInfo(String userName);
+
     Response<UserRespDto> regist(UserReqDto userReqDto);
 }

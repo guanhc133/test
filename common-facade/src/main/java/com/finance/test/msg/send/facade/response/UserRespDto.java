@@ -13,6 +13,7 @@ import lombok.Data;
 public class UserRespDto {
     private String userName;
     private String password;
+    private String email;
     private String captcha;
     private String rememberMe;
 }

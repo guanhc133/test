@@ -16,7 +16,9 @@ import java.io.Serializable;
 @Data
 public class UserDto implements Serializable{
     private static final long serialVersionUID = -8059598150508630963L;
+    @NotBlank(message = "用户名不能为空")
     private String userName;
+    @NotBlank(message = "密码不能为空")
     private String password;
     private String email;
 }

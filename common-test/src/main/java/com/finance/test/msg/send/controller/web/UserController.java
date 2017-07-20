@@ -1,7 +1,5 @@
 package com.finance.test.msg.send.controller.web;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.finance.test.msg.send.controller.dto.UserDto;
 import com.finance.test.msg.send.facade.Request.UserReqDto;
 import com.finance.test.msg.send.facade.response.UserRespDto;
@@ -13,20 +11,20 @@ import com.finance.test.msg.send.util.enums.TestBizCode;
 import com.finance.test.msg.send.util.exception.ServiceException;
 import com.finance.test.msg.send.util.model.Response;
 import com.finance.test.msg.send.util.util.GeneratorUtil;
+import com.finance.test.msg.send.util.util.ValidateUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +35,7 @@ import java.util.List;
  * </p>
  * User: guanhc Date: 2017/6/7 ProjectName:test Version:
  */
-@Controller
+@RestController
 @Slf4j
 @RequestMapping(value = "user/")
 public class UserController extends AbstractController {
@@ -52,33 +50,35 @@ public class UserController extends AbstractController {
     /**
      * 用户登录
      *
-     * @param userDto
+     * @param
      */
     @RequestMapping("login")
-    public void login(@ModelAttribute("userDto") UserDto userDto) {
-        log.info("call UserController.login userDto:{}", userDto);
+    public String login(String userName, String password) {
+//        log.info("call UserController.login userDto:{}", userDto);
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
+        Response<UserRespDto> resp = null;
         try {
-            UserInfoExample example = new UserInfoExample();
-            example.createCriteria().andUserNameEqualTo(userDto.getUserName()).andPasswordEqualTo(userDto.getPassword());
-            List<UserInfo> userInfoList = userManager.queryUserInfo(example);
-            if (null != userInfoList && userInfoList.size() > 0) {
+//            ValidateUtils.validateObject(userDto);
+//            String userName = userDto.getUserName();
+//            String password = userDto.getPassword();
+            resp = userService.queryUserIsExist(userName, password);
+            if (null != resp) {
                 request.getSession().setAttribute("token", GeneratorUtil.generatorToken());
                 request.getRequestDispatcher("/index.jsp").forward(request, response);
             }
         } catch (ServiceException se) {
             log.error("call UserController.login se:{}", se);
-            try {
-                response.getWriter().write("<h>登录名或密码错误</h>");
-            } catch (IOException io) {
-                log.error("call UserController.login error: {}", io);
-            }
+            return responseJson(se);
         } catch (Exception e) {
             log.error("call UserController.login error: {}", e);
+            return responseJson();
         }
+        List<Object> list = new ArrayList<Object>();
+        list.add(resp.getResult());
+        return responseJson(list, resp.isSuccess(), TestBizCode.BIZ_CODE_200001.getBizCode(), TestBizCode.BIZ_CODE_200001.getBizMsg());
     }
 
     /**
@@ -193,6 +193,27 @@ public class UserController extends AbstractController {
             return responseJson(se);
         } catch (Exception e) {
             log.error("call UserController.updateUserInfo,e:{}", e);
+            responseJson();
+        }
+        return responseJson(null, resp.isSuccess(), TestBizCode.BIZ_CODE_200001.getBizCode(), TestBizCode.BIZ_CODE_200001.getBizMsg());
+    }
+
+    /**
+     * 校验密码
+     *
+     * @param pass
+     * @return
+     */
+    public String checkPass(String pass) {
+        log.info("call UserController.checkPass,pass:{}", pass);
+        Response<String> resp = null;
+        try {
+            resp = userService.checkPass(pass);
+        } catch (ServiceException se) {
+            log.error("call UserController.checkPass,se:{}", se);
+            return responseJson(se);
+        } catch (Exception e) {
+            log.error("call UserController.checkPass,e:{}", e);
             responseJson();
         }
         return responseJson(null, resp.isSuccess(), TestBizCode.BIZ_CODE_200001.getBizCode(), TestBizCode.BIZ_CODE_200001.getBizMsg());

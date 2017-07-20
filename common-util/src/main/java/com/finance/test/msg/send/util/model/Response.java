@@ -20,7 +20,7 @@ public class Response<T> implements Serializable {
     private String responseCode;//响应码
     private String responseMsg;//响应信息
 
-    public Response(){
+    public Response() {
 
     }
 
@@ -29,17 +29,23 @@ public class Response<T> implements Serializable {
         this.result = result;
     }
 
-    public Response(T result,boolean boo) {
+    public Response(T result, boolean boo) {
         this.success = boo;
         this.result = result;
     }
 
-    public Response(String responseCode,String responseMsg){
+    public Response(String responseCode, String responseMsg) {
         this.responseCode = responseCode;
         this.responseMsg = responseMsg;
     }
 
-    public Response(T result,String responseCode,String responseMsg){
+    public Response(boolean ifSuccess, String responseCode, String responseMsg) {
+        this.success = ifSuccess;
+        this.responseCode = responseCode;
+        this.responseMsg = responseMsg;
+    }
+
+    public Response(T result, String responseCode, String responseMsg) {
         this.success = true;
         this.result = result;
         this.responseCode = responseCode;

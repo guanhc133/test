@@ -23,6 +23,7 @@ public abstract class AbstractController {
         ResponseModel model = new ResponseModel();
         model.setResStatus(Paramters.testId + "" + serviceException.getBizMsg());
         model.setResMsg(serviceException.getBizMsg());
+        model.setSuccess(Boolean.FALSE);
         return JSONObject.toJSON(model).toString();
     }
 
@@ -30,6 +31,7 @@ public abstract class AbstractController {
         ResponseModel model = new ResponseModel();
         model.setResStatus(Paramters.testId + "" + TestBizCode.BIZ_CODE_500001.getBizMsg());
         model.setResMsg(TestBizCode.BIZ_CODE_500001.getBizMsg());
+        model.setSuccess(Boolean.FALSE);
         return JSONObject.toJSON(model).toString();
     }
 

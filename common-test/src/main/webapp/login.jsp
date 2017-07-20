@@ -36,7 +36,7 @@
             <div class="login form">
                 <div class="group">
                     <div class="group-ipt email">
-                        <input type="text" name="userName" id="email" class="ipt" placeholder="请输入用户名" required>
+                        <input type="text" name="userName" id="userName" class="ipt" placeholder="请输入用户名" required>
                     </div>
                     <div class="group-ipt password">
                         <input type="password" name="password" id="password" class="ipt" placeholder="输入您的登录密码"
@@ -53,7 +53,8 @@
             </div>
 
             <div class="button">
-                <button type="submit" class="login-btn register-btn" id="button" disabled="disabled">登录</button>
+                <input type="button" class="login-btn register-btn" id="button" onclick="login()" value="登陆"/>
+                <span style="color: red" id="log"></span>
             </div>
 
             <div class="remember clearfix">
@@ -82,7 +83,7 @@
 <script src='js/index.js' type="text/javascript"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
-<script>
+<script type="text/javascript">
     function changeImage() {
         document.getElementById("imageRandom").src = document.getElementById("imageRandom").src + '?';
     }
@@ -99,32 +100,42 @@
      * 校验验证码
      */
     function validateCaptcha() {
-        <%--location.reload();--%>
-        <%--<%String cap = (String) request.getSession().getAttribute("rand");--%>
-        <%--System.out.println(request.getSession().getId());--%>
-            <%--System.out.println(cap);--%>
-         <%--%>--%>
-        <%--if ($("#captcha").val() == <%=GetSession.getSession()%>) {--%>
-            <%--document.getElementById("cap").innerHTML = "验证码正确";--%>
-        <%--} else {--%>
-            <%--document.getElementById("cap").innerHTML = "验证码错误";--%>
-            <%--document.getElementById("button").disabled = "disabled";--%>
-        <%--}--%>
         $.ajax({
             url: "captchaValidate/captchaValidate",
             type: 'post',
             dataType: 'json',
             data: {captcha: $("#captcha").val()},
             cache: false,
-            success: function (r) {
-                alert("修改成功!");
-                if (r.success()) {
-                    alert("修改成功!");
-                } else {
-                    alert("修改失败!");
+            success: function (data) {
+                if (!data.success) {
+                    document.getElementById("cap").innerHTML = "验证码错误，请刷新重试";
+                    document.getElementById("button").disabled = true;
                 }
+            },
+            error: function (data) {
+                alert("系统繁忙，请稍后再试。。。");
             }
         })
+
+        function login(){
+            alert("sss");
+            $.ajax({
+                url: "user/login",
+                type: 'post',
+                dataType: 'json',
+                data: {userName: $("#userName").val(),password:$("#password").val()},
+                cache: false,
+                success: function (data) {
+                    if (!data.success) {
+                        document.getElementById("log").innerHTML = "用户名或密码错误，请重新输入";
+                        document.getElementById("button").disabled = true;
+                    }
+                },
+                error: function (data) {
+                    alert("系统繁忙，请稍后再试。。。");
+                }
+            })
+        }
     }
 </script>
 </body>

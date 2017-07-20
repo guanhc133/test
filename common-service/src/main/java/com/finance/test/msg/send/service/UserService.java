@@ -105,12 +105,6 @@ public class UserService implements UserFacade {
                 if (null == userInfoList && userInfoList.size() == 0) {
                     throw new ServiceException(TestBizCode.BIZ_CODE_400005.getBizCode(), TestBizCode.BIZ_CODE_400005.getBizMsg());
                 }
-//                if (StringUtils.isNotEmpty(userReqDto.getEmail())) {
-//                    example.createCriteria().andEmailEqualTo(userReqDto.getEmail());
-//                }
-//                if (StringUtils.isNotEmpty(userReqDto.getPassword())) {
-//                    example.createCriteria().andPasswordEqualTo(userReqDto.getPassword());
-//                }
                 UserInfo userInfo = dozerMapper.map(userReqDto, UserInfo.class);
                 userManager.updateUserInfo(userInfo);
             } else {
@@ -123,6 +117,57 @@ public class UserService implements UserFacade {
             log.error("call UserService.updateUserInfo,e:{}", e);
             return new Response<String>(TestBizCode.BIZ_CODE_500001.getBizCode(), TestBizCode.BIZ_CODE_500001.getBizMsg());
         }
+        return new Response<String>("更新成功");
+    }
+
+    /**
+     * 校验密码
+     *
+     * @param pass
+     * @return
+     */
+    public Response<String> checkPass(String pass) {
+        log.info("call UserService.checkPass,pass:{}", pass);
+//        try {
+
+//        } catch (ServiceException se) {
+//            log.error("call UserService.checkPass,se:{}", se);
+//            return new Response<String>(se.getBizCode(), se.getBizMsg());
+//        } catch (Exception e) {
+//            log.error("call UserService.checkPass,e:{}", e);
+//            return new Response<String>(TestBizCode.BIZ_CODE_500001.getBizCode(), TestBizCode.BIZ_CODE_500001.getBizMsg());
+//        }
         return null;
+    }
+
+    /**
+     * 校验用户名密码是否有效
+     *
+     * @param userName
+     * @param password
+     * @return
+     */
+    public Response<UserRespDto> queryUserIsExist(String userName, String password) {
+        log.info("call UserService.queryUserInfo,userName:{},password:{}", userName, password);
+        UserRespDto userRespDto = null;
+        Response<UserRespDto> resp = null;
+        try {
+            UserInfoExample example = new UserInfoExample();
+            example.createCriteria().andUserNameEqualTo(userName).andPasswordEqualTo(password);
+            List<UserInfo> userList = userManager.queryUserInfo(example);
+            if (null != userList && userList.size() > 0) {
+                userRespDto = dozerMapper.map(userList.get(0), UserRespDto.class);
+                resp.setResult(userRespDto);
+            } else {
+                throw new ServiceException(TestBizCode.BIZ_CODE_400006.getBizCode(), TestBizCode.BIZ_CODE_400006.getBizMsg());
+            }
+        } catch (ServiceException se) {
+            log.error("call UserService.updateUserInfo,se:{}", se);
+            return new Response<UserRespDto>(Boolean.FALSE, se.getBizCode(), se.getBizMsg());
+        } catch (Exception e) {
+            log.error("call UserService.updateUserInfo,e:{}", e);
+            return new Response<UserRespDto>(Boolean.FALSE, TestBizCode.BIZ_CODE_500001.getBizCode(), TestBizCode.BIZ_CODE_500001.getBizMsg());
+        }
+        return resp;
     }
 }
