@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/common-dal/common-dal.iml" filepath="$PROJECT_DIR$/common-dal/common-dal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common-facade/common-facade.iml" filepath="$PROJECT_DIR$/common-facade/common-facade.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common-manager/common-manager.iml" filepath="$PROJECT_DIR$/common-manager/common-manager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common-service/common-service.iml" filepath="$PROJECT_DIR$/common-service/common-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common-test/common-test.iml" filepath="$PROJECT_DIR$/common-test/common-test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common-util/common-util.iml" filepath="$PROJECT_DIR$/common-util/common-util.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test.iml" filepath="$PROJECT_DIR$/test.iml" />
+    </modules>
+  </component>
+</project>
