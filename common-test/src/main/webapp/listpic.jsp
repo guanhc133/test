@@ -50,11 +50,11 @@
                         </li>
                         <li><a href="#">我的日记</a>
                             <ul>
-                                <li><a href="newslistpic.html">个人日记</a></li>
-                                <li><a href="newslistpic.html">学习笔记</a></li>
+                                <li><a href="<%=path %>/newslistpic.jsp">个人日记</a></li>
+                                <li><a href="<%=path %>/newslistpic.jsp">学习笔记</a></li>
                             </ul>
                         </li>
-                        <li><a href="newslistpic.html">技术文章</a> </li>
+                        <li><a href="<%=path %>/newslistpic.jsp">技术文章</a> </li>
                         <li><a href="#">给我留言</a> </li>
                     </ul>
                 </div>
@@ -78,14 +78,14 @@
                 <h2 class="nh1"><span>您现在的位置是：<a href="/" target="_blank">网站首页</a>>><a href="#" target="_blank">个人相册</a></span><b>个人相册</b></h2>
                 <div class="lispic">
                     <ul>
-                        <li><a href="/"><img src="images/01.jpg"><span>图片展示</span></a></li>
-                        <li><a href="/"><img src="images/02.jpg"><span>图片展示</span></a></li>
-                        <li><a href="/"><img src="images/03.jpg"><span>图片展示</span></a></li>
-                        <li><a href="/"><img src="images/04.jpg"><span>图片展示</span></a></li>
-                        <li><a href="/"><img src="images/03.jpg"><span>图片展示</span></a></li>
-                        <li><a href="/"><img src="images/06.jpg"><span>图片展示</span></a></li>
-                        <li><a href="/"><img src="images/01.jpg"><span>图片展示</span></a></li>
-                        <li><a href="/"><img src="images/02.jpg"><span>图片展示</span></a></li>
+                        <li><a href="/"><img src="<%=path %>/images/01.jpg"><span>图片展示</span></a></li>
+                        <li><a href="/"><img src="<%=path %>/images/02.jpg"><span>图片展示</span></a></li>
+                        <li><a href="/"><img src="<%=path %>/images/03.jpg"><span>图片展示</span></a></li>
+                        <li><a href="/"><img src="<%=path %>/images/04.jpg"><span>图片展示</span></a></li>
+                        <li><a href="/"><img src="<%=path %>/images/03.jpg"><span>图片展示</span></a></li>
+                        <li><a href="/"><img src="<%=path %>/images/06.jpg"><span>图片展示</span></a></li>
+                        <li><a href="/"><img src="<%=path %>/images/01.jpg"><span>图片展示</span></a></li>
+                        <li><a href="/"><img src="<%=path %>/images/02.jpg"><span>图片展示</span></a></li>
                     </ul>
                 </div>
                 <div class="pagelist">页次：1/1 每页25 总数10<a href="/">首页</a><a href="/">上一页</a><a href="/">下一页</a><a href="/">尾页</a></div>

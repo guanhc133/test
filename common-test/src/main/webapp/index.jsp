@@ -48,20 +48,20 @@
             <nav>
                 <div class="navigation">
                     <ul class="menu">
-                        <li><a href="index.html">网站首页</a></li>
-                        <li><a href="#">关于我</a>
+                        <li><a href="<%=path %>/index.jsp">网站首页</a></li>
+                        <li><a href="<%=path %>/about.jsp">关于我</a>
                             <ul>
-                                <li><a href="<%=path%>/about.html">个人简介</a></li>
-                                <li><a href="<%=path%>/listpic.html">个人相册</a></li>
+                                <li><a href="<%=path%>/about.jsp">个人简介</a></li>
+                                <li><a href="<%=path%>/listpic.jsp">个人相册</a></li>
                             </ul>
                         </li>
                         <li><a href="#">我的日记</a>
                             <ul>
-                                <li><a href="newslistpic.html">个人日记</a></li>
-                                <li><a href="newslistpic.html">学习笔记</a></li>
+                                <li><a href="<%=path%>/newslistpic.jsp">个人日记</a></li>
+                                <li><a href="<%=path%>/newslistpic.jsp">学习笔记</a></li>
                             </ul>
                         </li>
-                        <li><a href="newslistpic.html">技术文章</a></li>
+                        <li><a href="<%=path%>/newslistpic.jsp">技术文章</a></li>
                         <li><a href="#">给我留言</a></li>
                     </ul>
                 </div>
@@ -150,22 +150,22 @@
             <div class="tuwen">
                 <h3 class="tit">图文推荐</h3>
                 <ul>
-                    <li><a href="/"><img src="images/01.jpg"><b>住在手机里的朋友</b></a>
+                    <li><a href="/"><img src="<%=path %>/images/01.jpg"><b>住在手机里的朋友</b></a>
                         <p><span class="tulanmu"><a href="/">手机配件</a></span><span class="tutime">2015-02-15</span></p>
                     </li>
-                    <li><a href="/"><img src="images/02.jpg"><b>教你怎样用欠费手机拨打电话</b></a>
+                    <li><a href="/"><img src="<%=path %>/images/02.jpg"><b>教你怎样用欠费手机拨打电话</b></a>
                         <p><span class="tulanmu"><a href="/">手机配件</a></span><span class="tutime">2015-02-15</span></p>
                     </li>
                     <li><a href="/" title="手机的16个惊人小秘密，据说99.999%的人都不知"><img src="images/03.jpg"><b>手机的16个惊人小秘密，据说...</b></a>
                         <p><span class="tulanmu"><a href="/">手机配件</a></span><span class="tutime">2015-02-15</span></p>
                     </li>
-                    <li><a href="/"><img src="images/06.jpg"><b>住在手机里的朋友</b></a>
+                    <li><a href="/"><img src="<%=path %>/images/06.jpg"><b>住在手机里的朋友</b></a>
                         <p><span class="tulanmu"><a href="/">手机配件</a></span><span class="tutime">2015-02-15</span></p>
                     </li>
-                    <li><a href="/"><img src="images/04.jpg"><b>教你怎样用欠费手机拨打电话</b></a>
+                    <li><a href="/"><img src="<%=path %>/images/04.jpg"><b>教你怎样用欠费手机拨打电话</b></a>
                         <p><span class="tulanmu"><a href="/">手机配件</a></span><span class="tutime">2015-02-15</span></p>
                     </li>
-                    <li><a href="/"><img src="images/02.jpg"><b>教你怎样用欠费手机拨打电话</b></a>
+                    <li><a href="/"><img src="<%=path %>/images/02.jpg"><b>教你怎样用欠费手机拨打电话</b></a>
                         <p><span class="tulanmu"><a href="/">手机配件</a></span><span class="tutime">2015-02-15</span></p>
                     </li>
                     <li><a href="/" title="手机的16个惊人小秘密，据说99.999%的人都不知"><img src="images/03.jpg"><b>手机的16个惊人小秘密，据说...</b></a>
@@ -200,7 +200,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="ad"><img src="images/03.jpg"></div>
+            <div class="ad"><img src="<%=path %>/images/03.jpg"></div>
         </div>
     </div>
     <!-- container代码 结束 -->

@@ -42,20 +42,20 @@
             <nav>
                 <div  class="navigation">
                     <ul class="menu">
-                        <li><a href="index.html">网站首页</a></li>
+                        <li><a href="<%=path%>/index.jsp">网站首页</a></li>
                         <li><a href="#">关于我</a>
                             <ul>
-                                <li><a href="about.html">个人简介</a></li>
-                                <li><a href="listpic.html">个人相册</a></li>
+                                <li><a href="<%=path%>/about.jsp">个人简介</a></li>
+                                <li><a href="<%=path%>/listpic.jsp">个人相册</a></li>
                             </ul>
                         </li>
-                        <li><a href="#">我的日记</a>
+                        <li><a href="<%=path%>/newslistpic.jsp">我的日记</a>
                             <ul>
-                                <li><a href="newslistpic.html">个人日记</a></li>
-                                <li><a href="newslistpic.html">学习笔记</a></li>
+                                <li><a href="<%=path%>/newslistpic.jsp">个人日记</a></li>
+                                <li><a href="<%=path%>/newslistpic.jsp">学习笔记</a></li>
                             </ul>
                         </li>
-                        <li><a href="newslistpic.html">技术文章</a> </li>
+                        <li><a href="<%=path%>/newslistpic.jsp">技术文章</a> </li>
                         <li><a href="#">给我留言</a> </li>
                     </ul>
                 </div>
@@ -85,7 +85,7 @@
                 </div>
                 <ul class="about_content">
                     <p> 人生就是一个得与失的过程，而我却是一个幸运者，得到的永远比失去的多。生活的压力迫使我放弃了轻松的前台接待，放弃了体面的编辑，换来虽有些蓬头垢面的工作，但是我仍然很享受那些熬得只剩下黑眼圈的日子，因为我在学习使用Photoshop、Flash、Dreamweaver、ASP、PHP、JSP...中激发了兴趣，然后越走越远....</p>
-                    <p><img src="images/01.jpg"></p>
+                    <p><img src="<%=path%>/images/01.jpg"></p>
                     <p>“冥冥中该来则来，无处可逃”。 </p>
                 </ul>
             </div>
