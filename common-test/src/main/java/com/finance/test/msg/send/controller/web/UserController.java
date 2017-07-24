@@ -53,18 +53,18 @@ public class UserController extends AbstractController {
      * @param
      */
     @RequestMapping("login")
-    public String login(String userName, String password) {
-//        log.info("call UserController.login userDto:{}", userDto);
+    public String login(@ModelAttribute("userDto") UserDto userDto) {
+        log.info("call UserController.login userDto:{}", userDto);
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         Response<UserRespDto> resp = null;
         try {
-//            ValidateUtils.validateObject(userDto);
-//            String userName = userDto.getUserName();
-//            String password = userDto.getPassword();
-            resp = userService.queryUserIsExist(userName, password);
+            ValidateUtils.validateObject(userDto);
+            String userName = userDto.getUserName();
+            String password = userDto.getPassword();
+            resp = userService.queryUserIsExist(userName,password);
             if (null != resp) {
                 request.getSession().setAttribute("token", GeneratorUtil.generatorToken());
                 request.getRequestDispatcher("/index.jsp").forward(request, response);

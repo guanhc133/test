@@ -53,19 +53,20 @@
             </div>
 
             <div class="button">
-                <input type="button" class="login-btn register-btn" id="button" onclick="login()" value="登陆"/>
-                <span style="color: red" id="log"></span>
+                <%--<input type="button" class="login-btn register-btn" id="button" onclick="login()" value="登陆"/>--%>
+                    <button type="submit" class="login-btn register-btn" id="button" >登陆</button>
+                    <span style="color: red" id="log"></span>
             </div>
 
-            <div class="remember clearfix">
-                <label class="rememberMe"><span class="icon"><span class="zt"></span></span><input type="checkbox"
-                                                                                                   name="rememberMe"
-                                                                                                   id="rememberMe"
-                                                                                                   class="remember-mecheck"
-                                                                                                   checked>记住我</label>
-                <label class="forgot-password">
-                    <a href="#">忘记密码？</a>
-                </label>
+            <%--<div class="remember clearfix">--%>
+                <%--<label class="rememberMe"><span class="icon"><span class="zt"></span></span><input type="checkbox"--%>
+                                                                                                   <%--name="rememberMe"--%>
+                                                                                                   <%--id="rememberMe"--%>
+                                                                                                   <%--class="remember-mecheck"--%>
+                                                                                                   <%--checked>记住我</label>--%>
+                <%--<label class="forgot-password">--%>
+                    <%--<a href="#">忘记密码？</a>--%>
+                <%--</label>--%>
             </div>
         </div>
     </form>
@@ -110,15 +111,16 @@
                 if (!data.success) {
                     document.getElementById("cap").innerHTML = "验证码错误，请刷新重试";
                     document.getElementById("button").disabled = true;
+                }else{
+                    document.getElementById("button").disabled = false;
                 }
             },
             error: function (data) {
                 alert("系统繁忙，请稍后再试。。。");
             }
-        })
+        }),
 
         function login(){
-            alert("sss");
             $.ajax({
                 url: "user/login",
                 type: 'post',

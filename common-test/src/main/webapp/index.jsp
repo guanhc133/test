@@ -10,7 +10,6 @@
 <head>
     <%
         String path = request.getContextPath();
-        String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
     %>
     <meta charset="gb2312">
     <title>官红诚的个人博客――江南墨卷</title>
@@ -52,8 +51,8 @@
                         <li><a href="index.html">网站首页</a></li>
                         <li><a href="#">关于我</a>
                             <ul>
-                                <li><a href="about.html">个人简介</a></li>
-                                <li><a href="listpic.html">个人相册</a></li>
+                                <li><a href="<%=path%>/about.html">个人简介</a></li>
+                                <li><a href="<%=path%>/listpic.html">个人相册</a></li>
                             </ul>
                         </li>
                         <li><a href="#">我的日记</a>
