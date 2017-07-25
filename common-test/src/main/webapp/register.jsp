@@ -38,7 +38,7 @@
                     </div>
                     <div class="group-ipt user">
                         <input type="text" name="userName" id="userName" class="ipt" placeholder="选择一个用户名"
-                               onblur="validateUserName()" required>
+                               onblur="validateUser()" required>
                         <span style="color: #ff110e" id="inner"></span>
                     </div>
                     <div class="group-ipt password">
@@ -49,7 +49,7 @@
                                onblur="validatePassword()" required>
                     </div>
                     <div class="group-ipt verify">
-                        <input type="text" class="ipt" name="verify" id="verify" maxlength="4" placeholder="输入验证码"
+                        <input type="text" class="ipt" name="captcha" id="captcha" maxlength="4" placeholder="输入验证码"
                                onblur="validateCaptcha()"/>
                         <img src="servlet/ImageCaptchaServlet" id="imageRandom" title="看不清，请点击图片刷新"
                              onclick="changeImage()" class="imgcode"/>
@@ -83,7 +83,7 @@
     $(".login-btn").click(function () {
         var email = $("#email").val();
         var password = $("#password").val();
-        var verify = $("#verify").val();
+        var verify = $("#captcha").val();
     })
 
     $("#remember-me").click(function () {
@@ -107,50 +107,90 @@
      * 校验验证码
      */
     function validateCaptcha() {
-        <% String captch = (String)request.getSession().getAttribute("rand"); %>
-        if ($("#verify") == <%=captch%>>) {
-            document.getElementById("cap").innerHTML = "验证码正确";
-        }
+        $.ajax({
+            url: "captchaValidate/captchaValidate",
+            type: 'post',
+            dataType: 'json',
+            data: {captcha: $("#captcha").val()},
+            cache: false,
+            success: function (data) {
+                if (!data.success) {
+                    document.getElementById("cap").innerHTML = "验证码错误，请刷新重试";
+                    document.getElementById("button").disabled = true;
+                } else {
+                    document.getElementById("button").disabled = false;
+                }
+            },
+            error: function (data) {
+                alert("系统繁忙，请稍后再试。。。");
+            }
+        })
     }
 
-    function validateUserName() {
-        var userNam = $("#userName").val();
-        sendRequest("user/queryUserInfo?userName=" + userNam);
+
+    function validateUser() {
+        $.ajax({
+            url: "user/queryUserInfo",
+            type: 'post',
+            dataType: 'json',
+            data: {userName: $("#userName").val()},
+            cache: false,
+            success: function (data) {
+                alert(data.success);
+                if (data.success) {
+                    document.getElementById("inner").innerHTML = "用户名已被注册";
+                } else {
+                    document.getElementById("inner").innerHTML = "用户名可以使用";
+                }
+            },
+            error: function (data) {
+                alert("系统繁忙，请稍后再试。。。");
+            }
+        })
     }
 
-    function sendRequest(url) {
-        createXMLHttpRequest();
-        XMLHttpReq.open("POST", url, true);
-        XMLHttpReq.onreadystatechange = processResponse;
-        XMLHttpReq.send(null);
-    }
-    var XMLHttpReq = false;
-    function createXMLHttpRequest(){
-        if(window.XMLHttpRequest){
-            XMLHttpReq = new XMLHttpRequest();
-        }else if(window.ActiveXObject){
-            try{
-                XMLHttpReq = new ActiveXObject("MSXML2.XMLHTTP");
-            }catch(e){
-                try{
-                    XMLHttpReq = new ActiveXObject("Mircsoft.XMLHTTP");
-                }catch(e1){}
-            }
-        }
-    }
-    function processResponse() {
-        if (XMLHttpReq.readyState == 4) {
-            if (XMLHttpReq.status == 200) {
-                var res = XMLHttpReq.responseXML;
-                document.getElementById("inner").innerHTML = "用户名可以使用";
-                alert(XMLHttpReq.responseXML);
-            } else {
-                var res = XMLHttpReq.responseXML.getElementsByTagName("isSuccess");
-                alert(res);
-                document.getElementById("inner").innerHTML = "用户已注册";
-            }
-        }
-    }
+//    function validateUserName() {
+//        var userNam = $("#userName").val();
+//        sendRequest("user/queryUserInfo?userName=" + userNam);
+//    }
+//
+//    function sendRequest(url) {
+//        createXMLHttpRequest();
+//        XMLHttpReq.open("POST", url, true);
+//        XMLHttpReq.onreadystatechange = processResponse;
+//        XMLHttpReq.send(null);
+//    }
+//
+//    var XMLHttpReq = false;
+//
+//    function createXMLHttpRequest() {
+//        if (window.XMLHttpRequest) {
+//            XMLHttpReq = new XMLHttpRequest();
+//        } else if (window.ActiveXObject) {
+//            try {
+//                XMLHttpReq = new ActiveXObject("MSXML2.XMLHTTP");
+//            } catch (e) {
+//                try {
+//                    XMLHttpReq = new ActiveXObject("Mircsoft.XMLHTTP");
+//                } catch (e1) {
+//                }
+//            }
+//        }
+//    }
+//
+//    function processResponse() {
+//        if (XMLHttpReq.readyState == 4) {
+//            if (XMLHttpReq.status == 200) {
+//                var res = XMLHttpReq.responseXML;
+//                alert(res);
+//                document.getElementById("inner").innerHTML = "用户名可以使用";
+//            } else {
+//                var res = XMLHttpReq.responseXML.getElementsByTagName("isSuccess");
+//                alert(res);
+//                document.getElementById("inner").innerHTML = "用户已注册";
+//            }
+//        }
+//    }
 
 </script>
 </body>

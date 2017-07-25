@@ -111,14 +111,15 @@
                 if (!data.success) {
                     document.getElementById("cap").innerHTML = "验证码错误，请刷新重试";
                     document.getElementById("button").disabled = true;
-                }else{
+                } else {
                     document.getElementById("button").disabled = false;
                 }
             },
             error: function (data) {
                 alert("系统繁忙，请稍后再试。。。");
             }
-        }),
+        })
+    }
 
         function login(){
             $.ajax({
@@ -137,7 +138,6 @@
                     alert("系统繁忙，请稍后再试。。。");
                 }
             })
-        }
     }
 </script>
 </body>

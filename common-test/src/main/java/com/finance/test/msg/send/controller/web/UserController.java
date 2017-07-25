@@ -64,7 +64,7 @@ public class UserController extends AbstractController {
             ValidateUtils.validateObject(userDto);
             String userName = userDto.getUserName();
             String password = userDto.getPassword();
-            resp = userService.queryUserIsExist(userName,password);
+            resp = userService.queryUserIsExist(userName, password);
             if (null != resp) {
                 request.getSession().setAttribute("token", GeneratorUtil.generatorToken());
                 request.getRequestDispatcher("/index.jsp").forward(request, response);
@@ -90,17 +90,14 @@ public class UserController extends AbstractController {
     @RequestMapping("regist")
     public String registUser(@ModelAttribute("userDto") UserDto userDto) {
         log.info("call UserController.resgit,userDto:{}", userDto);
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
         Response<UserRespDto> resp = new Response<UserRespDto>();
         try {
-            //方法一：
-//            String data = JSON.toJSON(userDto).toString();
-//            UserReqDto userReqDto = (UserReqDto) JSON.parseObject(data, UserReqDto.class);
             //dozer转换对象报空指针（配置文件spring-dozer配置了空的mapping，已删除）
             UserReqDto userReqDto = dozerMapper.map(userDto, UserReqDto.class);
             resp = userService.regist(userReqDto);
-            response.setContentType("text/html;charset=UTF-8");
-            response.getWriter().write("<h>注册成功</h>");
+            request.getRequestDispatcher("/jump.jsp").forward(request, response);
         } catch (ServiceException se) {
             log.error("call UserController.regist se:{}", se);
             return responseJson(se);
@@ -124,11 +121,6 @@ public class UserController extends AbstractController {
         Response<UserRespDto> resp = null;
         try {
             resp = userService.queryUserInfo(userName);
-            if (null == resp) {
-                List<Object> list = new ArrayList<Object>();
-                list.add(resp.getResult());
-                return responseJson(list, resp.isSuccess(), TestBizCode.BIZ_CODE_200001.getBizCode(), TestBizCode.BIZ_CODE_200001.getBizMsg());
-            }
         } catch (ServiceException se) {
             log.error("call UserController.queryUserINfo,se:{}", se);
             responseJson(se);
@@ -136,9 +128,8 @@ public class UserController extends AbstractController {
             log.error("call UserController.queryUserINfo,e:{}", e);
             responseJson();
         }
-        List<Object> list = new ArrayList<Object>();
-        list.add(resp.getResult());
-        return responseJson(list, false, TestBizCode.BIZ_CODE_200001.getBizCode(), TestBizCode.BIZ_CODE_200001.getBizMsg());
+        System.out.println(resp.isSuccess());
+        return responseJson(null, resp.isSuccess(), TestBizCode.BIZ_CODE_200001.getBizCode(), TestBizCode.BIZ_CODE_200001.getBizMsg());
     }
 
 
@@ -204,6 +195,7 @@ public class UserController extends AbstractController {
      * @param pass
      * @return
      */
+    @RequestMapping("checkPass")
     public String checkPass(String pass) {
         log.info("call UserController.checkPass,pass:{}", pass);
         Response<String> resp = null;

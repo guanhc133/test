@@ -37,7 +37,6 @@ public class UserService implements UserFacade {
     public Response<UserRespDto> queryUserInfo(String userName) {
         log.info("call UserService.queryUserInfo,userName:{}", userName);
         UserRespDto userRespDto = new UserRespDto();
-        Response<UserRespDto> userRespDtoResponse = new Response<UserRespDto>();
         try {
             if (StringUtils.isEmpty(userName)) {
                 throw new ServiceException(TestBizCode.BIZ_CODE_400003.getBizCode(), TestBizCode.BIZ_CODE_400003.getBizMsg());
@@ -45,9 +44,8 @@ public class UserService implements UserFacade {
             UserInfoExample example = new UserInfoExample();
             example.createCriteria().andUserNameEqualTo(userName);
             List<UserInfo> userInfo = userManager.queryUserInfo(example);
-            if (null != userInfo && userInfo.size() > 0) {
-                userRespDto.setUserName(userInfo.get(0).getUserName());
-                userRespDtoResponse.setResult(userRespDto);
+            if (userInfo.size() == 0) {
+                return new Response<UserRespDto>(Boolean.TRUE, TestBizCode.BIZ_CODE_200001.getBizCode(), TestBizCode.BIZ_CODE_200001.getBizMsg());
             } else {
                 throw new ServiceException(TestBizCode.BIZ_CODE_400005.getBizCode(), TestBizCode.BIZ_CODE_400005.getBizMsg());
             }
@@ -58,7 +56,6 @@ public class UserService implements UserFacade {
             log.info("call UserService.queryUserInfo,e:{}", e);
             return new Response<UserRespDto>(TestBizCode.BIZ_CODE_500001.getBizCode(), TestBizCode.BIZ_CODE_500001.getBizMsg());
         }
-        return userRespDtoResponse;
     }
 
     @Override
