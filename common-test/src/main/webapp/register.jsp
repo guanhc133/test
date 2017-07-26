@@ -143,8 +143,8 @@
                     document.getElementById("inner").innerHTML = "用户名可以使用";
                 }
             },
-            error: function (data) {
-                alert("系统繁忙，请稍后再试。。。");
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(jqXHR.responseText);
             }
         })
     }

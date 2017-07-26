@@ -60,7 +60,7 @@ public class UserService implements UserFacade {
 
     @Override
     public Response<UserRespDto> regist(UserReqDto userReqDto) {
-        log.info("call UserService.queryUserInfo,userReqDto:{}", userReqDto);
+        log.info("call UserService.regist,userReqDto:{}", userReqDto);
         Response<UserRespDto> resp = new Response<UserRespDto>();
         UserRespDto userRespDto = new UserRespDto();
         try {
@@ -93,7 +93,7 @@ public class UserService implements UserFacade {
      * @return
      */
     public Response<String> updateUserInfo(UserReqDto userReqDto) {
-        log.info("call UserService.queryUserInfo,userReqDto:{}", userReqDto);
+        log.info("call UserService.updateUserInfo,userReqDto:{}", userReqDto);
         try {
             if (StringUtils.isNotEmpty(userReqDto.getUserName())) {
                 UserInfoExample example = new UserInfoExample();
@@ -145,7 +145,7 @@ public class UserService implements UserFacade {
      * @return
      */
     public Response<UserRespDto> queryUserIsExist(String userName, String password) {
-        log.info("call UserService.queryUserInfo,userName:{},password:{}", userName, password);
+        log.info("call UserService.queryUserIsExist,userName:{},password:{}", userName, password);
         UserRespDto userRespDto = null;
         Response<UserRespDto> resp = null;
         try {
@@ -159,10 +159,10 @@ public class UserService implements UserFacade {
                 throw new ServiceException(TestBizCode.BIZ_CODE_400006.getBizCode(), TestBizCode.BIZ_CODE_400006.getBizMsg());
             }
         } catch (ServiceException se) {
-            log.error("call UserService.updateUserInfo,se:{}", se);
+            log.error("call UserService.queryUserIsExist,se:{}", se);
             return new Response<UserRespDto>(Boolean.FALSE, se.getBizCode(), se.getBizMsg());
         } catch (Exception e) {
-            log.error("call UserService.updateUserInfo,e:{}", e);
+            log.error("call UserService.queryUserIsExist,e:{}", e);
             return new Response<UserRespDto>(Boolean.FALSE, TestBizCode.BIZ_CODE_500001.getBizCode(), TestBizCode.BIZ_CODE_500001.getBizMsg());
         }
         return resp;

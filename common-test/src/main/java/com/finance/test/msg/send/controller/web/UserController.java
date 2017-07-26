@@ -3,9 +3,6 @@ package com.finance.test.msg.send.controller.web;
 import com.finance.test.msg.send.controller.dto.UserDto;
 import com.finance.test.msg.send.facade.Request.UserReqDto;
 import com.finance.test.msg.send.facade.response.UserRespDto;
-import com.finance.test.msg.send.manager.UserManager;
-import com.finance.test.msg.send.model.UserInfo;
-import com.finance.test.msg.send.model.UserInfoExample;
 import com.finance.test.msg.send.service.UserService;
 import com.finance.test.msg.send.util.enums.TestBizCode;
 import com.finance.test.msg.send.util.exception.ServiceException;
@@ -15,7 +12,6 @@ import com.finance.test.msg.send.util.util.ValidateUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,8 +36,6 @@ import java.util.List;
 @RequestMapping(value = "user/")
 public class UserController extends AbstractController {
 
-    @Autowired
-    private UserManager userManager;
     @Autowired
     private Mapper dozerMapper;
     @Autowired
@@ -209,5 +203,16 @@ public class UserController extends AbstractController {
             responseJson();
         }
         return responseJson(null, resp.isSuccess(), TestBizCode.BIZ_CODE_200001.getBizCode(), TestBizCode.BIZ_CODE_200001.getBizMsg());
+    }
+
+
+    /**
+     * 发布文章
+     *
+     * @param page
+     * @return
+     */
+    public String publishPage(String page) {
+        return null;
     }
 }

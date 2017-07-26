@@ -114,5 +114,7 @@
     <orderEntry type="module" module-name="common-service" />
     <orderEntry type="module" module-name="common-facade" />
     <orderEntry type="library" name="Maven: jstl:jstl:1.2" level="project" />
+    <orderEntry type="library" name="Maven: commons-fileupload:commons-fileupload:1.3" level="project" />
+    <orderEntry type="library" name="Maven: commons-io:commons-io:2.2" level="project" />
   </component>
 </module>
