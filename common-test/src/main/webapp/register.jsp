@@ -34,15 +34,15 @@
             <div class="login form">
                 <div class="group">
                     <div class="group-ipt email">
-                        <input type="email" name="email" id="email" class="ipt" placeholder="邮箱地址" required>
+                        <input type="email" name="email" id="email" class="ipt" placeholder="邮箱地址" required="true">
                     </div>
                     <div class="group-ipt user">
                         <input type="text" name="userName" id="userName" class="ipt" placeholder="选择一个用户名"
-                               onblur="validateUser()" required>
+                               onblur="validateUser()" required="true">
                         <span style="color: #ff110e" id="inner"></span>
                     </div>
                     <div class="group-ipt password">
-                        <input type="password" name="password" id="password" class="ipt" placeholder="设置登录密码" required>
+                        <input type="password" name="password" id="password" class="ipt" placeholder="设置登录密码" required="true">
                     </div>
                     <div class="group-ipt password1">
                         <input type="password" name="password1" id="password1" class="ipt" placeholder="重复密码"
@@ -50,7 +50,7 @@
                     </div>
                     <div class="group-ipt verify">
                         <input type="text" class="ipt" name="captcha" id="captcha" maxlength="4" placeholder="输入验证码"
-                               onblur="validateCaptcha()"/>
+                               onblur="validateCaptcha()" required="true"/>
                         <img src="servlet/ImageCaptchaServlet" id="imageRandom" title="看不清，请点击图片刷新"
                              onclick="changeImage()" class="imgcode"/>
                         <span style="color: blue" id="cap"></span>

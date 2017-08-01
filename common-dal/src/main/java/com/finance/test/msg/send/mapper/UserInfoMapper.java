@@ -95,4 +95,6 @@ public interface UserInfoMapper {
     int updateByPrimaryKey(UserInfo record);
 
     int updateUserInfo(UserInfo userInfo);
+
+    List<UserInfo> queryAll();
 }

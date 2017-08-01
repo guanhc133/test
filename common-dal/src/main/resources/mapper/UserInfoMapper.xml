@@ -267,4 +267,12 @@
       </if>
     </set>
   </update>
+
+  <select id="queryAll" resultMap="BaseResultMap">
+    SELECT
+    *
+    FROM
+    t_customer_login_info
+    WHERE 1=1
+  </select>
 </mapper>

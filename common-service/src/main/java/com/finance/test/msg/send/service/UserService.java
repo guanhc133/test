@@ -9,6 +9,8 @@ import com.finance.test.msg.send.model.UserInfoExample;
 import com.finance.test.msg.send.util.enums.TestBizCode;
 import com.finance.test.msg.send.util.exception.ServiceException;
 import com.finance.test.msg.send.util.model.Response;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,6 +88,15 @@ public class UserService implements UserFacade {
         return resp;
     }
 
+    @Override
+    public PageInfo<UserRespDto> queryAll(int pageNo,int pageSize) {
+        PageHelper.startPage(pageNo + 1, pageSize);
+        List<UserInfo> userList = userManager.queryAll();
+        PageInfo pageInfo = new PageInfo(userList);
+        UserRespDto userRespList = dozerMapper.map(pageInfo.getList(), UserRespDto.class);
+        return null;
+    }
+
     /**
      * 更新用户
      *
@@ -117,25 +128,7 @@ public class UserService implements UserFacade {
         return new Response<String>("更新成功");
     }
 
-    /**
-     * 校验密码
-     *
-     * @param pass
-     * @return
-     */
-    public Response<String> checkPass(String pass) {
-        log.info("call UserService.checkPass,pass:{}", pass);
-//        try {
 
-//        } catch (ServiceException se) {
-//            log.error("call UserService.checkPass,se:{}", se);
-//            return new Response<String>(se.getBizCode(), se.getBizMsg());
-//        } catch (Exception e) {
-//            log.error("call UserService.checkPass,e:{}", e);
-//            return new Response<String>(TestBizCode.BIZ_CODE_500001.getBizCode(), TestBizCode.BIZ_CODE_500001.getBizMsg());
-//        }
-        return null;
-    }
 
     /**
      * 校验用户名密码是否有效

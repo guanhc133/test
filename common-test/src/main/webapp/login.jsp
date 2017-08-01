@@ -36,15 +36,15 @@
             <div class="login form">
                 <div class="group">
                     <div class="group-ipt email">
-                        <input type="text" name="userName" id="userName" class="ipt" placeholder="请输入用户名" required>
+                        <input type="text" name="userName" id="userName" class="ipt" placeholder="请输入用户名" required="true">
                     </div>
                     <div class="group-ipt password">
                         <input type="password" name="password" id="password" class="ipt" placeholder="输入您的登录密码"
-                               required>
+                               required="true">
                     </div>
                     <div class="group-ipt verify">
                         <input type="text" class="ipt" name="captcha" id="captcha" maxlength="4" placeholder="输入验证码"
-                               onblur="validateCaptcha()" required/>
+                               onblur="validateCaptcha()" required="true"/>
                         <img src="servlet/ImageCaptchaServlet" id="imageRandom" title="看不清，请点击图片刷新"
                              onclick="changeImage()" class="imgcode"/>
                         <span style="color: red" id="cap"></span>
@@ -54,20 +54,17 @@
 
             <div class="button">
                 <%--<input type="button" class="login-btn register-btn" id="button" onclick="login()" value="登陆"/>--%>
-                    <button type="submit" class="login-btn register-btn" id="button" >登陆</button>
-                    <span style="color: red" id="log"></span>
+                <button type="submit" class="login-btn register-btn" id="button">登陆</button>
+                <span style="color: red" id="log"></span>
             </div>
 
             <%--<div class="remember clearfix">--%>
-                <%--<label class="rememberMe"><span class="icon"><span class="zt"></span></span><input type="checkbox"--%>
-                                                                                                   <%--name="rememberMe"--%>
-                                                                                                   <%--id="rememberMe"--%>
-                                                                                                   <%--class="remember-mecheck"--%>
-                                                                                                   <%--checked>记住我</label>--%>
-                <%--<label class="forgot-password">--%>
-                    <%--<a href="#">忘记密码？</a>--%>
-                <%--</label>--%>
-            </div>
+            <%--<label class="rememberMe"><span class="icon"><span class="zt"></span></span><input type="checkbox"--%>
+            <%--class="remember-mecheck"--%>
+            <%--checked>记住我</label>--%>
+            <%--<label class="forgot-password">--%>
+            <%--<a href="#">忘记密码？</a>--%>
+            <%--</label>--%>
         </div>
     </form>
 </div>
@@ -121,24 +118,26 @@
         })
     }
 
-        function login(){
-            $.ajax({
-                url: "user/login",
-                type: 'post',
-                dataType: 'json',
-                data: {userName: $("#userName").val(),password:$("#password").val()},
-                cache: false,
-                success: function (data) {
-                    if (!data.success) {
-                        document.getElementById("log").innerHTML = "用户名或密码错误，请重新输入";
-                        document.getElementById("button").disabled = true;
-                    }
-                },
-                error: function (data) {
-                    alert("系统繁忙，请稍后再试。。。");
+    function login() {
+        $.ajax({
+            url: "user/login",
+            type: 'post',
+            dataType: 'json',
+            data: {userName: $("#userName").val(), password: $("#password").val()},
+            cache: false,
+            success: function (data) {
+                if (!data.success) {
+                    document.getElementById("log").innerHTML = "用户名或密码错误，请重新输入";
+                    document.getElementById("button").disabled = true;
                 }
-            })
+            },
+            error: function (data) {
+                alert("系统繁忙，请稍后再试。。。");
+            }
+        })
     }
+
+
 </script>
 </body>
 </html>
