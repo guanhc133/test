@@ -59,6 +59,13 @@
         <processorPath useClasspath="true" />
         <module name="common-service" />
       </profile>
+      <profile default="false" name="Annotation profile for useForTest" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="useForTest" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="common-dal" target="1.6" />
@@ -68,6 +75,7 @@
       <module name="common-test" target="1.6" />
       <module name="common-util" target="1.6" />
       <module name="test" target="1.6" />
+      <module name="useForTest" target="1.6" />
     </bytecodeTargetLevel>
   </component>
 </project>

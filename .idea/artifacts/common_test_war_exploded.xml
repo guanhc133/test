@@ -102,6 +102,10 @@
           <element id="library" level="project" name="Maven: jstl:jstl:1.2" />
           <element id="library" level="project" name="Maven: commons-fileupload:commons-fileupload:1.3" />
           <element id="library" level="project" name="Maven: commons-io:commons-io:2.2" />
+          <element id="archive" name="useForTest-1.0-SNAPSHOT.jar">
+            <element id="module-output" name="useForTest" />
+          </element>
+          <element id="library" level="project" name="Maven: org.aspectj:aspectjweaver:1.8.8" />
         </element>
       </element>
       <element id="directory" name="META-INF">

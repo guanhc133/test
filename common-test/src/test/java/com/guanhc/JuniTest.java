@@ -8,6 +8,7 @@ import com.finance.test.msg.send.facade.Request.UserReqDto;
 import com.finance.test.msg.send.provider.MsgSendMqProvider;
 import com.finance.test.msg.send.quartz.MsgSendJob;
 import com.finance.test.msg.send.service.UserService;
+import com.finance.test.msg.send.userForTest.Service;
 import org.dozer.Mapper;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,8 @@ public class JuniTest extends BaseTest {
     private Mapper dozerMapper;
     @Autowired
     private UserService userService;
+    @Autowired
+    private Service service;
 
     @Test
     public void testHttp() throws Exception {
@@ -146,5 +149,11 @@ public class JuniTest extends BaseTest {
                 }
             }
         });
+    }
+
+    @Test
+    public void testAspect(){
+        service.doSomethingOne();
+        service.doSomethingTwo();
     }
 }

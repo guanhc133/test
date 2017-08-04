@@ -9,6 +9,7 @@
       <module fileurl="file://$PROJECT_DIR$/common-test/common-test.iml" filepath="$PROJECT_DIR$/common-test/common-test.iml" />
       <module fileurl="file://$PROJECT_DIR$/common-util/common-util.iml" filepath="$PROJECT_DIR$/common-util/common-util.iml" />
       <module fileurl="file://$PROJECT_DIR$/test.iml" filepath="$PROJECT_DIR$/test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/useForTest/useForTest.iml" filepath="$PROJECT_DIR$/useForTest/useForTest.iml" />
     </modules>
   </component>
 </project>

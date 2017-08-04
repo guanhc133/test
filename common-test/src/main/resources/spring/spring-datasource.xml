@@ -5,6 +5,7 @@
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:bean="http://www.springframework.org/schema/beans"
        xmlns="http://www.springframework.org/schema/beans" xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
       http://www.springframework.org/schema/mvc
@@ -12,7 +13,10 @@
        http://www.springframework.org/schema/task
        http://www.springframework.org/schema/task/spring-task.xsd
        http://www.springframework.org/schema/tx
-       http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+       http://www.springframework.org/schema/tx/spring-tx-4.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+    <aop:aspectj-autoproxy proxy-target-class="true" />
 
     <tx:annotation-driven/>
 
@@ -44,6 +48,19 @@
         <property name="testOnReturn" value="true"/>
         <property name="testWhileIdle" value="true"/>
     </bean>
+
+    <bean id="aspect" class="com.finance.test.msg.send.userForTest.Aspect"/>
+
+    <aop:config>
+        <aop:aspect id="jobAspect" ref="aspect">
+            <!-- 配置指定切入的对象 -->
+            <aop:pointcut id="point_cut" expression="execution(* com.finance.test.msg.send.userForTest.*.*(..))"/>
+            <!-- 前置通知 -->
+            <aop:before method="before" pointcut-ref="point_cut"/>
+            <aop:after method="after" pointcut-ref="point_cut"/>
+        </aop:aspect>
+    </aop:config>
+
 
     <!-- 配置事务管理器 -->
     <bean id="transactionManager"
