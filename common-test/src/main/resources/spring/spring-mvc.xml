@@ -54,9 +54,8 @@
 
     <!-- quartz定时任务 -->
     <!--<import resource="quartz.xml"/>-->
-    <!--dozer configuration-->
-    <!--&lt;!&ndash;mq cluster configuraton&ndash;&gt;-->
-    <import resource="rabbitMq-cluster.xml"/>
+    <!--rabbitMq-->
+    <!--<import resource="rabbitMq-cluster.xml"/>-->
     <import resource="spring-datasource.xml"/>
 
     <import resource="captcha.xml"/>

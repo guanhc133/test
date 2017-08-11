@@ -2,10 +2,13 @@
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
-
+    <!--由mvc统一管理，项目启动时自动初始化调用-->
     <!-- ======================== 任务类和具体方法 ======================== -->
     <!-- APP推送任务 -->
-    <bean id="msgSendJob" class="com.finance.test.msg.send.quartz.MsgSendJob"/>
+    <bean id="msgSendJob" class="com.finance.test.msg.send.quartz.MsgSendJob">
+        <!--用法：定时任务执行时会把${user_filepath}值带过去-->
+        <property name="filepath" value="${user_filepath}"></property>
+    </bean>
     <bean id="msgSendJobMethod"
           class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
         <property name="targetObject">
@@ -21,7 +24,7 @@
     <bean id="MsgSendTriggerBean" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="msgSendJobMethod"></property>
         <!-- 配置具体触发时间（5秒执行一次） -->
-        <property name="cronExpression" value="*/1 * * * * ?"></property>
+        <property name="cronExpression" value="0/5 * * * * ? *"></property>
     </bean>
 
 

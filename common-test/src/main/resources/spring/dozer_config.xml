@@ -9,4 +9,18 @@
         <date-format>yyyy-MM-dd</date-format>
         <wildcard>true</wildcard>
     </configuration>
+
+    <!--特定字段转换-->
+    <mapping>
+        <class-a>com.finance.test.msg.send.facade.Request.DozerTestDto</class-a>
+        <class-b>com.finance.test.msg.send.facade.Request.UserReqDto</class-b>
+        <field>
+            <a>name</a>
+            <b>userName</b>
+        </field>
+        <field>
+            <a>pass</a>
+            <b>password</b>
+        </field>
+    </mapping>
 </mappings>

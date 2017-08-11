@@ -17,7 +17,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 描述：
@@ -89,7 +92,7 @@ public class UserService implements UserFacade {
     }
 
     @Override
-    public PageInfo<UserRespDto> queryAll(int pageNo,int pageSize) {
+    public PageInfo<UserRespDto> queryAll(int pageNo, int pageSize) {
         PageHelper.startPage(pageNo + 1, pageSize);
         List<UserInfo> userList = userManager.queryAll();
         PageInfo pageInfo = new PageInfo(userList);
@@ -127,7 +130,6 @@ public class UserService implements UserFacade {
         }
         return new Response<String>("更新成功");
     }
-
 
 
     /**
