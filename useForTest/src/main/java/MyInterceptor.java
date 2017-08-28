@@ -5,7 +5,7 @@ import net.sf.cglib.proxy.MethodProxy;
 import java.lang.reflect.Method;
 
 /**
- * 描述：面向切面编程
+ * 描述：面向切面编程（代码方式）
  * <p>
  * #
  * </p>

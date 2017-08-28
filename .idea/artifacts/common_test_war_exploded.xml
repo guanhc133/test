@@ -105,13 +105,13 @@
           </element>
           <element id="library" level="project" name="Maven: org.aspectj:aspectjweaver:1.8.8" />
           <element id="library" level="project" name="Maven: org.apache.poi:poi-ooxml:3.9" />
-          <element id="library" level="project" name="Maven: org.apache.poi:poi:3.9" />
-          <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.5" />
-          <element id="library" level="project" name="Maven: org.apache.poi:poi-ooxml-schemas:3.9" />
-          <element id="library" level="project" name="Maven: org.apache.xmlbeans:xmlbeans:2.3.0" />
-          <element id="library" level="project" name="Maven: stax:stax-api:1.0.1" />
           <element id="library" level="project" name="Maven: dom4j:dom4j:1.6.1" />
           <element id="library" level="project" name="Maven: xml-apis:xml-apis:1.0.b2" />
+          <element id="library" level="project" name="Maven: org.apache.xmlbeans:xmlbeans:2.4.0" />
+          <element id="library" level="project" name="Maven: stax:stax-api:1.0.1" />
+          <element id="library" level="project" name="Maven: org.apache.poi:poi-ooxml-schemas:3.9" />
+          <element id="library" level="project" name="Maven: org.apache.poi:poi:3.9" />
+          <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.5" />
           <element id="library" level="project" name="Maven: org.apache.ws.commons.axiom:axiom-dom:1.2.13" />
           <element id="library" level="project" name="Maven: org.apache.ws.commons.axiom:axiom-api:1.2.13" />
           <element id="library" level="project" name="Maven: jaxen:jaxen:1.1.3" />

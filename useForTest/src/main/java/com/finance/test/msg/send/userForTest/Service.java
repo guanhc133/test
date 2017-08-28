@@ -1,7 +1,7 @@
 package com.finance.test.msg.send.userForTest;
 
 /**
- * 描述：
+ * 描述：切面
  * <p>
  * #
  * </p>

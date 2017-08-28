@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.finance.test.msg.send.facade.Request.DozerTestDto;
 import com.finance.test.msg.send.facade.Request.UserReqDto;
 import com.finance.test.msg.send.facade.response.UserRespDto;
 //import com.finance.test.msg.send.mapper.CityRegionInfoMapper;
@@ -12,6 +13,7 @@ import com.finance.test.msg.send.facade.response.UserRespDto;
 import com.finance.test.msg.send.service.UserService;
 import com.finance.test.msg.send.userForTest.Service;
 import com.finance.test.msg.send.util.model.Response;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.dozer.Mapper;
@@ -29,6 +31,8 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.*;
 import java.lang.reflect.Method;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -54,7 +58,7 @@ public class JuniTest extends BaseTest {
     private UserService userService;
     @Autowired
     private Service service;
-//    @Autowired
+    //    @Autowired
 //    private CityRegionInfoMapper cityRegionInfoMapper;
     @Autowired
     private ApplicationContext applicationContext;
@@ -357,13 +361,13 @@ public class JuniTest extends BaseTest {
 //        if (null != list && list.size() > 0) {
 //            for (int t = 0; t < list.size(); t++) {
 //                regionCode = list.get(t).getRegionCode();
-                jsonpath = path + "/" + regionCode + ".json";
-                String a = this.ReadFile(jsonpath);
-                JSONObject json = JSON.parseObject(a);
-                if (null != json) {
-                    Set<String> set = json.keySet();
-                    for (String key : set) {
-                        String dd = (String) json.get(key);
+        jsonpath = path + "/" + "110101.json";
+        String a = this.ReadFile(jsonpath);
+        JSONObject json = JSON.parseObject(a);
+        if (null != json) {
+            Set<String> set = json.keySet();
+            for (String key : set) {
+                String dd = (String) json.get(key);
 //                        CityRegionInfo cityRegionInfo = new CityRegionInfo();
 //                        cityRegionInfo.setRegionCode(key);
 //                        cityRegionInfo.setLevelType("4");
@@ -372,8 +376,9 @@ public class JuniTest extends BaseTest {
 //                        cityRegionInfo.setCreatedAt(new Date());
 //                        cityRegionInfo.setCreatedBy("SYS");
 //                        cityRegionInfoMapper.insert(cityRegionInfo);
-                    }
-                }
+                System.out.println(dd);
+            }
+        }
 //            }
 //        }
     }
@@ -412,10 +417,11 @@ public class JuniTest extends BaseTest {
 
     /**
      * 反射获取类并执行类方法
+     *
      * @throws Exception
      */
     @Test
-    public void testReflectMethod() throws Exception{
+    public void testReflectMethod() throws Exception {
         String classPath = "com.finance.test.msg.send.service.UserService";
         String mothedName = "regist";
         UserReqDto userReqDto = new UserReqDto();
@@ -442,5 +448,124 @@ public class JuniTest extends BaseTest {
         //执行regist方法
         Response<UserRespDto> result = (Response<UserRespDto>) ReflectionUtils.invokeMethod(method, applicationContext.getBean(name), userReqDto);
         System.out.println(result);
+    }
+
+    @Test
+    public void testTrans() {
+        DozerTestDto dozerTestDto = new DozerTestDto();
+        dozerTestDto.setPass("123");
+        dozerTestDto.setName("name");
+        UserReqDto userReqDto = dozerMapper.map(dozerTestDto, UserReqDto.class);
+        System.out.println(userService.regist(userReqDto));
+
+    }
+
+    public static int testWsdlConnection(String address) throws Exception {
+        int status = 404;
+        try {
+            URL urlObj = new URL(address);
+            HttpURLConnection oc = (HttpURLConnection) urlObj.openConnection();
+            oc.setUseCaches(false);
+            oc.setConnectTimeout(3000); // 设置超时时间
+            status = oc.getResponseCode();// 请求状态
+            if (200 == status) {
+                // 200是请求地址顺利连通。。
+                return status;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        }
+        return status;
+    }
+
+    @Test
+    public void testUrl() throws Exception {
+        String url = "http://192.168.201.19:9071/rzb-front/idCerti/ecaptialIdCertiAuth/V1.0.0";
+        int ss = this.testWsdlConnection(url);
+        System.out.println(ss);
+    }
+
+
+    /**
+     * 权重分配演示
+     */
+    @Test
+    public void testWeight() {
+        HashMap hashCh = new HashMap();
+        hashCh.put("ChoiName", "王一");
+        hashCh.put("Weight", 0);
+        HashMap hashCh2 = new HashMap();
+        hashCh2.put("ChoiName", "张二");
+        hashCh2.put("Weight", 1);
+        HashMap hashCh3 = new HashMap();
+        hashCh3.put("ChoiName", "李三");
+        hashCh3.put("Weight", 5);
+        HashMap hashCh4 = new HashMap();
+        hashCh4.put("ChoiName", "延四");
+        hashCh4.put("Weight", 2);
+        ArrayList choiceList = new ArrayList();
+
+        choiceList.add(hashCh);
+        choiceList.add(hashCh2);
+        choiceList.add(hashCh3);
+        choiceList.add(hashCh4);
+        for (int i = 0; i < 40; i++) {
+            System.out.println(weightChoice(choiceList));
+        }
+    }
+
+    public static String weightChoice(ArrayList<HashMap> listChoice) {
+        ArrayList<HashMap<String, Comparable>> choiceList = new ArrayList<HashMap<String, Comparable>>(); //选择器列表，剔除不需要选择的选项，权重为0，不进选择列表。转变权重为上下限值。
+
+        Integer minR = 0, maxR = -1;    //上下限
+        for (HashMap temp : listChoice) {
+            String ChoiName = (String) temp.get("ChoiName");
+            Integer weight = (Integer) temp.get("Weight");
+            if (weight == 0) continue;
+            minR = maxR + 1;
+            maxR = minR + weight - 1;
+            HashMap hashCh = new HashMap();
+            hashCh.put("ChoiName", ChoiName);
+            hashCh.put("minR", minR); //下限
+            hashCh.put("maxR", maxR); //上限
+            choiceList.add(hashCh);
+        }
+        //System.out.println(JSON.toJSON(choiceList));
+        Random random = new Random();
+        int index = random.nextInt(maxR + 1);  //产生大于等于0，小于maxR+1的整数
+        //System.out.println(index);
+        for (HashMap temp : choiceList) {
+            Integer mini = (Integer) temp.get("minR");
+            Integer maxi = (Integer) temp.get("maxR");
+            if (mini <= index && index <= maxi) {
+                String choName = (String) temp.get("ChoiName");
+                //System.out.println(choName);
+                return choName;
+            }
+        }
+        return "";
+    }
+
+    /**
+     * 移除json串里的某一字段
+     * 应用场景一：打印日志时不希望出现敏感信息
+     */
+    @Test
+    public void testRemoveJsonField(){
+        Map map = new HashMap();
+        map.put("name", "1");
+        map.put("pass", "2");
+        map.put("addr", "3");
+
+        //将map转为json对象
+        JSONObject jsonObject = new JSONObject(map);
+        //判断是否有name字段
+        if(jsonObject.containsKey("name")){
+            //移除name字段
+            jsonObject.remove("name");
+        }
+        //结果：{"pass":"2","addr":"3"}
+        System.out.println(String.valueOf(jsonObject));
     }
 }

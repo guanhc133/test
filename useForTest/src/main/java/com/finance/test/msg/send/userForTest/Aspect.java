@@ -1,7 +1,7 @@
 package com.finance.test.msg.send.userForTest;
 
 /**
- * 描述：动态注入（spring结合aop）演示
+ * 描述：动态注入（spring结合aop）演示（xml配置方式）
  * <p>
  * #
  * </p>
