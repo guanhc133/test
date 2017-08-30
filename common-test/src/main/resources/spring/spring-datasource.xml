@@ -68,6 +68,7 @@
         </property>
     </bean>
 
+    <!-- 切面编程start -->
     <bean id="aspect" class="com.finance.test.msg.send.userForTest.Aspect"/>
 
     <aop:config>
@@ -79,7 +80,7 @@
             <aop:after method="after" pointcut-ref="point_cut"/>
         </aop:aspect>
     </aop:config>
-
+    <!-- 切面编程end -->
 
     <!-- 配置事务管理器 -->
     <bean id="transactionManager"

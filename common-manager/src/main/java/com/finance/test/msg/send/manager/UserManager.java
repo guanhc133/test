@@ -28,7 +28,6 @@ public class UserManager {
     public List<UserInfo> queryUserInfo(UserInfoExample example) {
         log.info("call UserLoginManager.queryUserIfo,example=【{}】", example);
         List<UserInfo> userInfo = null;
-
         try {
             userInfo = userInfoMapper.selectByExample(example);
         } catch (Exception e) {

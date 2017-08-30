@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -51,6 +52,7 @@ public class ExportExcel {
      * 导出excel
      */
     @RequestMapping("exporyExcel")
+    @ResponseBody
     public void exporyExcel(HttpServletResponse response, int id) {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/x-download");
@@ -118,20 +120,5 @@ public class ExportExcel {
             return new XSSFWorkbook(OPCPackage.open(inp));
         }
         throw new IllegalArgumentException("你的excel版本目前poi解析不了");
-    }
-
-    /**
-     * whatever
-     * @param request
-     * @param response
-     */
-    public void file(HttpServletRequest request, HttpServletResponse response) {
-        String fileName = (String) request.getParameter("fileName");
-        String onLine = (String) request.getParameter("onLine");
-        try {
-
-        } catch (Exception e) {
-            log.error("错误，e:{}",e);
-        }
     }
 }

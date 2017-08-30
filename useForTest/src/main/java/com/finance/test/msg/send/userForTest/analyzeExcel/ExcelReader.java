@@ -128,9 +128,9 @@ public class ExcelReader {
 
     //代码可用，只不过path在这里用不了，单独写测试类调用即可
     public static void main(String[] args) {
-        String path = ExcelReader.class.getClassLoader().getResource("user").getPath();
+//        String path = ExcelReader.class.getClassLoader().getResource("user").getPath();
         ExcelReader poi = new ExcelReader();
-        poi.loadExcel(path+"/"+"工作周报_官红诚.xlsx");
+        poi.loadExcel("工作周报_官红诚.xlsx");
         poi.init();
         poi.show();
     }
