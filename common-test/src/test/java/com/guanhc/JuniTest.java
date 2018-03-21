@@ -6,6 +6,7 @@ import com.finance.test.msg.send.facade.Request.UserReqDto;
 import com.finance.test.msg.send.provider.MsgSendMqProvider;
 import com.finance.test.msg.send.quartz.MsgSendJob;
 import com.finance.test.msg.send.service.UserService;
+import com.finance.test.msg.send.util.util.AESUtil;
 import org.dozer.Mapper;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -95,6 +96,24 @@ public class JuniTest extends BaseTest{
         userReqDto.setPassword("1111");
         userReqDto.setEmail("1162290346@qq.com");
         System.out.println(userService.regist(userReqDto));
+    }
+
+    @Test
+    public void AESEncodeTest(){
+        //密钥
+        String key = "woshishe";
+        //待加密原文
+        String content = "我是加密内容";
+        System.out.println(AESUtil.AESEncode(key, content));
+    }
+
+    @Test
+    public void AESDncodeTest(){
+        //密钥
+        String key = "woshise";
+        //加密后的内容
+        String content = "2QmBuBwpZKWmjTGZuaEIVIZElAdjO6JrzxQWhk3ebxg=";
+        System.out.println(AESUtil.AESDncode(key, content));
     }
 
 }
