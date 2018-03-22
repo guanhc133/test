@@ -12,7 +12,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
 /**
- * DESCRIPTION:
+ * DESCRIPTION:对称加密
  * Create on:2018/3/21,14:38
  *
  * @author guanhc
