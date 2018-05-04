@@ -94,10 +94,10 @@ public class JuniTest extends BaseTest{
     @Test
     public void dozerTest(){
         UserReqDto userReqDto = new UserReqDto();
-        userReqDto.setUserName("guan");
+        userReqDto.setUserName(userReqDto.getEmail());
         userReqDto.setPassword("1111");
         userReqDto.setEmail("1162290346@qq.com");
-        System.out.println(userService.regist(userReqDto));
+//        System.out.println(userService.regist(userReqDto));
     }
 
     @Test
