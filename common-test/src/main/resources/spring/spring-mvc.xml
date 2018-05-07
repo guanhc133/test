@@ -56,7 +56,7 @@
     <!--&lt;!&ndash;mq cluster configuraton&ndash;&gt;-->
     <!--<import resource="rabbitMq-cluster.xml"/>-->
     <import resource="spring-datasource.xml"/>
-
+    <import resource="fastdfs/spring-fastdfs.xml"/>
     <import resource="captcha.xml"/>
     <import resource="spring-dozer.xml"/>
 </beans>
