@@ -44,5 +44,18 @@
             <groupId>com.github.tobato</groupId>
             <artifactId>fastdfs-client</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>itextpdf</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>itext-asian</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.finance.test.msg.send</groupId>
+            <artifactId>common-test</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 </project>
