@@ -7,6 +7,9 @@
           <element id="module-output" name="common-test" />
         </element>
         <element id="directory" name="lib">
+          <element id="archive" name="common-test-1.0-SNAPSHOT.jar">
+            <element id="module-output" name="common-test" />
+          </element>
           <element id="library" level="project" name="Maven: org.springframework:spring-tx:4.3.4.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-beans:4.3.4.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-core:4.3.4.RELEASE" />
@@ -97,9 +100,6 @@
           <element id="library" level="project" name="Maven: net.coobird:thumbnailator:0.4.8" />
           <element id="library" level="project" name="Maven: com.itextpdf:itextpdf:5.5.10" />
           <element id="library" level="project" name="Maven: com.itextpdf:itext-asian:5.5.10" />
-          <element id="archive" name="common-test-1.0-SNAPSHOT.jar">
-            <element id="module-output" name="common-test" />
-          </element>
           <element id="library" level="project" name="Maven: net.sf.dozer:dozer:5.4.0" />
           <element id="library" level="project" name="Maven: commons-beanutils:commons-beanutils:1.8.3" />
           <element id="library" level="project" name="Maven: org.slf4j:jcl-over-slf4j:1.6.6" />

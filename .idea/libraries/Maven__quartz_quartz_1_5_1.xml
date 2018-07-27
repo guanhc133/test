@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Maven: quartz:quartz:1.5.1">
     <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/quartz/quartz/1.5.1/quartz-1.5.1.jar!/" />
+      <root url="jar://E:/repository/quartz/quartz/1.5.1/quartz-1.5.1.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$MAVEN_REPOSITORY$/quartz/quartz/1.5.1/quartz-1.5.1-javadoc.jar!/" />
+      <root url="jar://E:/repository/quartz/quartz/1.5.1/quartz-1.5.1-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$MAVEN_REPOSITORY$/quartz/quartz/1.5.1/quartz-1.5.1-sources.jar!/" />
+      <root url="jar://E:/repository/quartz/quartz/1.5.1/quartz-1.5.1-sources.jar!/" />
     </SOURCES>
   </library>
 </component>
