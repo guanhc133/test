@@ -2,6 +2,7 @@ package com.finance.test.msg.send.mapper;
 
 import com.finance.test.msg.send.model.UserInfo;
 import com.finance.test.msg.send.model.UserInfoExample;
+import java.util.Date;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -95,4 +96,17 @@ public interface UserInfoMapper {
     int updateByPrimaryKey(UserInfo record);
 
     int updateUserInfo(UserInfo userInfo);
+
+    List<UserInfo> queryAll();
+
+    List<UserInfo> querySpecialTinme(@Param("shardingItem") int shardingItem,
+                                     @Param("startDate") Date startDate,
+                                     @Param("shardingTotalCount") int shardingTotalCount);
+
+    List<UserInfo> queryTimeAll(@Param("shardingItem")int shardingItem,
+                                @Param("startDate")Date startDate,
+                                @Param("pageSize")String pageSize,
+                                @Param("shardingItem")int shardingTotalCount,
+                                @Param("endDate")Date endDate,
+                                @Param("id")String id);
 }

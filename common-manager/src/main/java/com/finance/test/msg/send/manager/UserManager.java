@@ -69,4 +69,18 @@ public class UserManager {
             throw new ServiceException(TestBizCode.BIZ_CODE_500001);
         }
     }
+
+    /**
+     * 查询全部用户
+     *
+     * @return
+     */
+    public List<UserInfo> queryAll() {
+        try {
+            return userInfoMapper.queryAll();
+        } catch (Exception e) {
+            log.error("call CustomerOperatorManager.registUser err,e={}", e);
+            throw new ServiceException(TestBizCode.BIZ_CODE_500001);
+        }
+    }
 }

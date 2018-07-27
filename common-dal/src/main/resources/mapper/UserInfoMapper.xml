@@ -267,4 +267,38 @@
       </if>
     </set>
   </update>
+
+  <select id="queryAll" resultMap="BaseResultMap">
+    SELECT
+    *
+    FROM
+    t_customer_login_info
+    WHERE 1=1
+  </select>
+
+  <select id="querySpecialTinme" resultMap="BaseResultMap">
+    SELECT
+    *
+    FROM
+    t_customer_login_info
+    WHERE 1=1
+    --AND CREATED_DATE = #{startDate,jdbcType=TIMESTAMP}
+    AND mod(id,#{shardingTotalCount,jdbcType=DECIMAL}) = #{shardingItem,jdbcType=DECIMAL}
+
+  </select>
+
+  <select id="queryTimeAll" resultMap="BaseResultMap">
+    SELECT *
+    from
+    (select
+    *
+    from T_INFO_MIX_BUSINESS_ORDER
+    where
+    --AND COMPLETE_TIME >#{startDate,jdbcType=TIMESTAMP}
+    --AND COMPLETE_TIME &lt;= #{endDate,jdbcType=TIMESTAMP}
+    AND ID > #{id,jdbcType=VARCHAR}
+    AND mod(id,#{shardingTotalCount,jdbcType=DECIMAL}) = #{shardingItem,jdbcType=DECIMAL}
+    ORDER by COMPLETE_TIME,ID)
+    where rownum &lt;= #{PAGE_SIZE,jdbcType=DECIMAL}
+  </select>
 </mapper>

@@ -21,6 +21,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -181,38 +182,5 @@ public class UserController extends AbstractController {
             responseJson();
         }
         return responseJson(null, resp.isSuccess(), TestBizCode.BIZ_CODE_200001.getBizCode(), TestBizCode.BIZ_CODE_200001.getBizMsg());
-    }
-
-    /**
-     * 校验密码
-     *
-     * @param pass
-     * @return
-     */
-    @RequestMapping("checkPass")
-    public String checkPass(String pass) {
-        log.info("call UserController.checkPass,pass:{}", pass);
-        Response<String> resp = null;
-        try {
-            resp = userService.checkPass(pass);
-        } catch (ServiceException se) {
-            log.error("call UserController.checkPass,se:{}", se);
-            return responseJson(se);
-        } catch (Exception e) {
-            log.error("call UserController.checkPass,e:{}", e);
-            responseJson();
-        }
-        return responseJson(null, resp.isSuccess(), TestBizCode.BIZ_CODE_200001.getBizCode(), TestBizCode.BIZ_CODE_200001.getBizMsg());
-    }
-
-
-    /**
-     * 发布文章
-     *
-     * @param page
-     * @return
-     */
-    public String publishPage(String page) {
-        return null;
     }
 }

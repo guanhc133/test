@@ -5,6 +5,7 @@
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:bean="http://www.springframework.org/schema/beans"
        xmlns="http://www.springframework.org/schema/beans" xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
       http://www.springframework.org/schema/mvc
@@ -12,7 +13,10 @@
        http://www.springframework.org/schema/task
        http://www.springframework.org/schema/task/spring-task.xsd
        http://www.springframework.org/schema/tx
-       http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+       http://www.springframework.org/schema/tx/spring-tx-4.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+    <aop:aspectj-autoproxy proxy-target-class="true" />
 
     <tx:annotation-driven/>
 
@@ -44,6 +48,39 @@
         <property name="testOnReturn" value="true"/>
         <property name="testWhileIdle" value="true"/>
     </bean>
+
+    <bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+        <!-- 核心线程数，默认为1 -->
+        <property name="corePoolSize" value="${mq.corePoolSize}"/>
+        <!-- 最大线程数，默认为Integer.MAX_VALUE -->
+        <property name="maxPoolSize" value="${mq.maxPoolSize}"/>
+        <!-- 队列最大长度，一般需要设置值>=notifyScheduledMainExecutor.maxNum；默认为Integer.MAX_VALUE -->
+        <property name="queueCapacity" value="${mq.queueCapacity}"/>
+        <!-- 线程池维护线程所允许的空闲时间，默认为60s -->
+        <property name="keepAliveSeconds" value="${mq.keepAliveSeconds}"/>
+        <!-- 线程池对拒绝任务（无线程可用）的处理策略，目前只支持AbortPolicy、CallerRunsPolicy；默认为后者 -->
+        <property name="rejectedExecutionHandler">
+            <!-- AbortPolicy:直接抛出java.util.concurrent.RejectedExecutionException异常 -->
+            <!-- CallerRunsPolicy:主线程直接执行该任务，执行完之后尝试添加下一个任务到线程池中，可以有效降低向线程池内添加任务的速度 -->
+            <!-- DiscardOldestPolicy:抛弃旧的任务、暂不支持；会导致被丢弃的任务无法再次被执行 -->
+            <!-- DiscardPolicy:抛弃当前任务、暂不支持；会导致被丢弃的任务无法再次被执行 -->
+            <bean class="java.util.concurrent.ThreadPoolExecutor.CallerRunsPolicy"/>
+        </property>
+    </bean>
+
+    <!-- 切面编程start -->
+    <bean id="aspect" class="com.finance.test.msg.send.userForTest.Aspect"/>
+
+    <aop:config>
+        <aop:aspect id="jobAspect" ref="aspect">
+            <!-- 配置指定切入的对象 -->
+            <aop:pointcut id="point_cut" expression="execution(* com.finance.test.msg.send.userForTest.*.*(..))"/>
+            <!-- 前置通知 -->
+            <aop:before method="before" pointcut-ref="point_cut"/>
+            <aop:after method="after" pointcut-ref="point_cut"/>
+        </aop:aspect>
+    </aop:config>
+    <!-- 切面编程end -->
 
     <!-- 配置事务管理器 -->
     <bean id="transactionManager"

@@ -50,13 +50,15 @@
     <property name="suffix" value=".jsp"/>
     </bean>
 
+
+
     <!-- quartz定时任务 -->
     <!--<import resource="quartz.xml"/>-->
-    <!--dozer configuration-->
-    <!--&lt;!&ndash;mq cluster configuraton&ndash;&gt;-->
+    <!--rabbitMq-->
     <!--<import resource="rabbitMq-cluster.xml"/>-->
     <import resource="spring-datasource.xml"/>
     <import resource="fastdfs/spring-fastdfs.xml"/>
     <import resource="captcha.xml"/>
     <import resource="spring-dozer.xml"/>
+    <import resource="elastic-job.xml"/>
 </beans>

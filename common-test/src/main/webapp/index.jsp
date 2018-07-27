@@ -63,6 +63,7 @@
                         </li>
                         <li><a href="<%=path%>/newslistpic.jsp">技术文章</a></li>
                         <li><a href="#">给我留言</a></li>
+                        <li><a href="#">控制台</a></li>
                     </ul>
                 </div>
             </nav>
@@ -208,7 +209,7 @@
     <footer>
         <div class="footer">
             <div class="f_l">
-                <p>All Rights Reserved 版权所有：<a href="http://www.yangqq.com">杨青个人博客</a> 备案号：蜀ICP备00000000号</p>
+                <p>All Rights Reserved 版权所有：<a href="http://www.yangqq.com">官红诚个人博客</a> 备案号：蜀ICP备00000000号</p>
             </div>
             <div class="f_r textr">
                 <p>Design by DanceSmile</p>

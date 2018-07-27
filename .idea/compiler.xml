@@ -12,6 +12,7 @@
         <module name="common-service" />
         <module name="common-test" />
         <module name="common-util" />
+        <module name="useForTest" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -22,6 +23,7 @@
       <module name="common-test" target="1.6" />
       <module name="common-util" target="1.6" />
       <module name="test" target="1.6" />
+      <module name="useForTest" target="1.6" />
     </bytecodeTargetLevel>
   </component>
 </project>
