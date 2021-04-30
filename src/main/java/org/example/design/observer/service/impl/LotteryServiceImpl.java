@@ -17,11 +17,7 @@ public class LotteryServiceImpl extends AbstractLotteryService {
     protected String doDraw(String uId) {
         // 摇号
         String lottery = minibusTargetService.lottery(uId);
-        // 发短信
-        System.out.println("给用户发送短信通知(短信):"+lottery);
-        // 发MQ消息
-        System.out.println("给用户发送MQ通知:"+lottery);
         // 结果
-        return "end!";
+        return lottery;
     }
 }

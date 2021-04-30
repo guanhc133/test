@@ -21,6 +21,8 @@ public abstract class AbstractLotteryService {
                 MQEventListener());
         eventManager.subscribe(EventManager.EventType.Message, new
                 MessageEventListener());
+        eventManager.unsubscribe(EventManager.EventType.Message,new
+                MessageEventListener());
     }
 
     public String draw(String uId) {
