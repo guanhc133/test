@@ -1,4 +1,4 @@
-package org.example.state.enums;
+package org.example.design.state.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

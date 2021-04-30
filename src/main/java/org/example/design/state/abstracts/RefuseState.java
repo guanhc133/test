@@ -1,47 +1,47 @@
-package org.example.state.abstracts;
+package org.example.design.state.abstracts;
 
-import org.example.state.enums.Status;
-import org.example.state.service.ActivityService;
+import org.example.design.state.enums.Status;
+import org.example.design.state.service.ActivityService;
 
-public class PassState extends State {
+public class RefuseState extends State {
     @Override
     public String arraignment(String activityId, Enum<Status> currentStatus) {
-        return "审核成功不可提交审核中";
+        return "审核拒绝不可提交审核";
     }
 
     @Override
     public String checkPass(String activityId, Enum<Status> currentStatus) {
-        ActivityService.execStatus(activityId, currentStatus,
-                Status.Pass);
-        return "活动审核完成";
+        return "审核拒绝不可审核通过";
     }
 
     @Override
     public String checkRefuse(String activityId, Enum<Status> currentStatus) {
         ActivityService.execStatus(activityId, currentStatus,
                 Status.Refuse);
-        return "活动审核拒绝";
+        return "活动审核拒绝完成";
     }
 
     @Override
     public String checkRevoke(String activityId, Enum<Status> currentStatus) {
-        return "审核成功不可撤审";
+        ActivityService.execStatus(activityId, currentStatus,
+                Status.Editing);
+        return "活动审核撤审成功";
     }
 
     @Override
     public String close(String activityId, Enum<Status> currentStatus) {
-        return "审核成功不可活动关闭";
+        ActivityService.execStatus(activityId, currentStatus,
+                Status.Close);
+        return "活动关闭成功";
     }
 
     @Override
     public String open(String activityId, Enum<Status> currentStatus) {
-        return "审核成功不可提交审核中";
+        return "活动审核拒绝不可开启活动";
     }
 
     @Override
     public String doing(String activityId, Enum<Status> currentStatus) {
-        ActivityService.execStatus(activityId, currentStatus,
-                Status.Doing);
-        return "审核成功后活动进行中";
+        return "活动审核拒绝不可活动中";
     }
 }

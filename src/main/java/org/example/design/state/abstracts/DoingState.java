@@ -1,7 +1,7 @@
-package org.example.state.abstracts;
+package org.example.design.state.abstracts;
 
-import org.example.state.enums.Status;
-import org.example.state.service.ActivityService;
+import org.example.design.state.enums.Status;
+import org.example.design.state.service.ActivityService;
 
 public class DoingState extends State {
     @Override

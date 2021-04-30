@@ -2,9 +2,9 @@ package org.example;
 
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
-import org.example.state.enums.Status;
-import org.example.state.handler.StateHandler;
-import org.example.state.service.ActivityService;
+import org.example.design.state.enums.Status;
+import org.example.design.state.handler.StateHandler;
+import org.example.design.state.service.ActivityService;
 import org.junit.Test;
 
 @Slf4j

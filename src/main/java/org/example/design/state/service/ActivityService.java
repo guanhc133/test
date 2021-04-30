@@ -1,7 +1,6 @@
-package org.example.state.service;
+package org.example.design.state.service;
 
-import org.example.state.ActivityInfo;
-import org.example.state.enums.Status;
+import org.example.design.state.enums.Status;
 
 import java.util.Date;
 import java.util.Map;

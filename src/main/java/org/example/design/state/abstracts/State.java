@@ -1,7 +1,7 @@
-package org.example.state.abstracts;
+package org.example.design.state.abstracts;
 
 
-import org.example.state.enums.Status;
+import org.example.design.state.enums.Status;
 
 /**
  *  @author: guanhongcheng

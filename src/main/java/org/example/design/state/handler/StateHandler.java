@@ -1,8 +1,8 @@
-package org.example.state.handler;
+package org.example.design.state.handler;
 
 
-import org.example.state.abstracts.*;
-import org.example.state.enums.Status;
+import org.example.design.state.abstracts.*;
+import org.example.design.state.enums.Status;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
