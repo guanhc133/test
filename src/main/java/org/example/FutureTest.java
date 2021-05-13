@@ -17,7 +17,7 @@ public class FutureTest {
          *
          * 导致: 已完成的任务可能得不到及时处理
          */
-//        case1();
+        case1();
         //跟case1区别为 case1直到当前线程取到值否则一直阻塞等待
         //case2处理较快的线程先取值，慢的放最后，用户体验上好些，比如加载页面，用case1可能先加载2条数据出来，剩下的48条阻塞一会才出来
         //用case2的话，49条会提前加载出来，剩下的一个慢的最后加载
@@ -39,7 +39,7 @@ public class FutureTest {
          *
          * 解决了已完成任务得不到及时处理的问题
          */
-        case2();
+//        case2();
     }
 
     private static void case1() throws ExecutionException, InterruptedException {
@@ -77,7 +77,7 @@ public class FutureTest {
         List<Future<String>> result = new ArrayList<>();
         for (int i = 0; i < 50; i++) {
             int finalI = i;
-            completionService.submit(new Callable<String>() {
+            Future<String> submit = completionService.submit(new Callable<String>() {
                 @Override
                 public String call() throws Exception {
                     if (finalI == 2) {
@@ -88,17 +88,33 @@ public class FutureTest {
                     return "11";
                 }
             });
+            result.add(submit);
         }
+
+
+
+
+
+
         int count = 0;
         long l = System.currentTimeMillis();
         System.out.println("处理开始，时间："+l);
-        while (count < 50) {
-            Future<String> take = completionService.take();
-            String s = take.get();
-            //开始业务处理
-            System.out.println("返回结果：" + s);
-            count++;
+
+        //此处代码和case1示例效果相同
+        for (Future<String> stringFuture : result) {
+            String s = stringFuture.get();
+            System.out.println("我获取了结果：" + s);
         }
+
+
+
+//        while (count < 50) {
+//            Future<String> take = completionService.take();
+//            String s = take.get();
+//            //开始业务处理
+//            System.out.println("返回结果：" + s);
+//            count++;
+//        }
         System.out.println("处理结束,时间：" + (System.currentTimeMillis() - l));
         System.out.println("总数："+ count);
         service.shutdown();
