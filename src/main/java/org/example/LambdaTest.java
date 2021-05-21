@@ -1,16 +1,120 @@
 package org.example;
 
 import com.alibaba.fastjson.JSONObject;
+import com.google.common.collect.ImmutableMap;
 import org.example.dto.Transaction;
 import org.example.dto.User;
 
+import java.math.BigInteger;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.*;
 
 public class LambdaTest {
 
     public static void main(String... args) {
+
+//        case1();
+
+//        case2();
+//        case3();
+
+        case4();
+
+
+    }
+
+    private static void case4() {
+        IntStream.rangeClosed(1, 10)
+                .peek(i -> {
+                    System.out.println("第一次peek");
+                    System.out.println(i);
+                })
+                .filter(i -> i > 5)
+                .peek(i -> {
+                    System.out.println("第二次peek");
+                    System.out.println(i);
+                })
+                .filter(i -> i % 2 == 0)
+                .forEach(i -> {
+                    System.out.println("最终结果");
+                    System.out.println(i);
+                });
+
+        /**
+         * 流的生命周期有三个阶段：
+         * 起始生成阶段。
+         * 中间操作会逐一获取元素并进行处理。 可有可无。所有中间操作都是惰性的，因此，流在管道中流动之前，任何操作都不会产生任何影响。
+         * 终端操作。通常分为 最终的消费 （foreach 之类的）和 归纳 （collect）两类。还有重要的一点就是终端操作启动了流在管道中的流动。
+         */
+        Stream<String> stream = Stream.of("hello", "felord.cn");
+        //不会打印
+//        stream.peek(System.out::println);
+        //.collect启动流  可打印
+        stream.peek(System.out::println).collect(Collectors.toList());
+    }
+
+    private static void case2() {
+        /**
+         * 相当于for循环   parallel并行处理
+         * 1到10的数字流
+         *
+         * 类似于
+         * IntStream.range(1,10) 表示1-9的数字流
+         */
+        IntStream.rangeClosed(1, 10).parallel().forEach(i -> {
+            long l = System.currentTimeMillis();
+            System.out.println("处理开始，时间："+l);
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+
+            }
+            System.out.println(i);
+            System.out.println("处理结束,时间：" + (System.currentTimeMillis() - l));
+        });
+
+        /**
+         * 返回特定数字1，2，3
+         */
+        IntStream.of(1, 2, 3).forEach(i -> System.out.println(i));
+    }
+
+    private static void case3() {
+        List<User> userList = new ArrayList<>();
+        User user = new User();
+        user.setName("1");
+        user.setAddress("3");
+        List<String> ss = new ArrayList<>();
+        ss.add("a");
+        ss.add("b");
+        ss.add("c");
+        user.setLl(ss);
+        User user1 = new User();
+        user1.setName("2");
+        user1.setAddress("4");
+        List<String> ss1 = new ArrayList<>();
+        ss1.add("a");
+        ss1.add("d");
+        ss1.add("e");
+        user.setLl(ss1);
+        userList.add(user);
+        userList.add(user1);
+        //根据姓名分组统计地址列表
+        Map<String, List<String>> collect1 = userList.stream().collect(groupingBy(item -> item.getName(), mapping(item -> item.getAddress(), toList())));
+        System.out.println(collect1);
+
+
+        Map<String, Integer> map = ImmutableMap.of("0", 3, "1", 8, "0.29", 7, "1.67", 3);
+        //根据key倒序
+        List<Map.Entry<String, Integer>> collect = map.entrySet().stream().sorted(Map.Entry.<String, Integer>comparingByKey().reversed()).collect(Collectors.toList());
+        System.out.println(collect);
+    }
+
+    private static void case1() {
         User raoul = new User("Raoul", "Cambridge");
         User mario = new User("Mario", "Milan");
         User alan = new User("Alan", "Cambridge");
@@ -63,12 +167,9 @@ public class LambdaTest {
         System.out.println(min);
 
 
-
-
         //reduce案例
         Integer sum = Stream.of(10, 5, 3, 2, 1, 0).reduce(9, LambdaTest::sumTest);
         System.out.println(sum);
-
     }
 
     public static Integer sumTest(int a1, int a2) {
