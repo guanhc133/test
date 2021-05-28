@@ -20,7 +20,12 @@ public class StringFormatTest {
      */
     private static final String SIGN_SIZE = "%06d";
 
-
+    /**
+     * %05d  %-5s
+     * 有负号的在右边补足，没有的默认左边补足
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         //不足5位用0在左侧补足
         String format1 = String.format("%05d", 99);
@@ -31,7 +36,7 @@ public class StringFormatTest {
 
 
         //不足5位用0在空格补足
-        String format3 = String.format("%-5s", 99);
+        String format3 = String.format("%5s", 99);
         //满足5位不用补
         String format4 = String.format("%-5s", 99999);
         System.out.println("转换后的字符串："+format3+"我是结尾");
