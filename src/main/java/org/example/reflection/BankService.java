@@ -3,6 +3,12 @@ package org.example.reflection;
 import java.util.Arrays;
 import java.util.Comparator;
 
+
+/**
+ *  @author: guanhongcheng
+ *  @Date: 2021/5/28 14:33
+ *  @Description: 模拟向第三方发送请求
+ */
 public class BankService {
 
     public static String sendRequest(AbstractApi api) {
